@@ -26,7 +26,6 @@ jobs:
       - name: install lodash
         run: |
           npm install lodash
-          import _ from "lodash"
       - name: linter install
         run: npm install --save-dev eslint
       - name: linter init
