@@ -19,18 +19,17 @@ const genDiff = (file1, file2) => {
   const compare = unitedKeys.map((key) => {
     let acc = '';
     if (!Object.hasOwn(data1, key)) {
-      acc = `${acc}+ ${key}: ${data2[key]}`;
+      acc = `${acc}  + ${key}: ${data2[key]}`;
     } else if (!Object.hasOwn(data2, key)) {
-      acc = `${acc}- ${key}: ${data1[key]}`;
+      acc = `${acc}  - ${key}: ${data1[key]}`;
     } else if (data1[key] !== data2[key]) {
-      acc = `${acc}- ${key}: ${data1[key]}\n+ ${key}: ${data2[key]}`;
+      acc = `${acc}  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
     } else {
-      acc = `${acc}  ${key}: ${data1[key]}`;
+      acc = `${acc}    ${key}: ${data1[key]}`;
     }
     return acc;
   });
   const outputData = compare.join('\n');
-
-  console.log(outputData);
+  console.log(`{\n${outputData}\n}`);
 };
 export default genDiff;

@@ -3,7 +3,6 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import gendiff from '../src/diff.js';
 
-/* eslint-disable-next-line no-undef */
 test('gendiff', () => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
@@ -12,7 +11,7 @@ test('gendiff', () => {
 
   const filepath1 = getFixturePath('file1.json');
   const filepath2 = getFixturePath('file2.json');
+  const expectedOutput = readFile('expectedOutput.txt');
 
-  /* eslint-disable-next-line no-undef */
-  expect(gendiff(filepath1, filepath2).toEqual(readFile('expectedOutput.txt')));
+  expect(gendiff('file1.json', 'file2.json')).toEqual('expectedOutput.txt');
 });
