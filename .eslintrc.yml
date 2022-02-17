@@ -1,9 +1,18 @@
+root: true
+
+plugins:
+  - jest
+
 env:
   node: true
-  es2021: true
+  jest: true
+  browser: true
+
+parser: "@babel/eslint-parser"
 
 extends:
-  - airbnb-base
+  - "airbnb-base"
+  - "plugin:jest/recommended"
 
 parserOptions:
   ecmaVersion: latest
