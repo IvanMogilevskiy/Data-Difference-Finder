@@ -23,9 +23,6 @@ jobs:
           make install
         env:
           CI: true
-      - name: install lodash
-        run: |
-          npm install lodash
       - name: linter install
         run: npm install --save-dev eslint
       - name: linter init
