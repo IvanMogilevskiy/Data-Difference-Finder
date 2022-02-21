@@ -2,15 +2,17 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import _ from 'lodash';
+import parseData from './parsers.js';
 
 const genDiff = (file1, file2) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
   const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
+  const format = path.extname(getFixturePath(file1));
 
-  const data1 = JSON.parse(readFile(file1));
-  const data2 = JSON.parse(readFile(file2));
+  const data1 = parseData(readFile(file1), format);
+  const data2 = parseData(readFile(file2), format);
 
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
