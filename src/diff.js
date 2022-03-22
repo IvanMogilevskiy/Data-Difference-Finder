@@ -1,8 +1,9 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
-import _ from 'lodash';
+import buildInnerTree from './innerTree.js';
 import parseData from './parsers.js';
+import makeStylish from './formatters/stylish.js';
 
 const genDiff = (file1, file2) => {
   const __filename = fileURLToPath(import.meta.url);
@@ -13,25 +14,9 @@ const genDiff = (file1, file2) => {
 
   const data1 = parseData(readFile(file1), format);
   const data2 = parseData(readFile(file2), format);
+  const diffTree = buildInnerTree(data1, data2);
 
-  const keys1 = Object.keys(data1);
-  const keys2 = Object.keys(data2);
-  const unitedKeys = (_.union(keys1, keys2)).sort();
-
-  const compare = unitedKeys.map((key) => {
-    let acc = '';
-    if (!_.has(data1, key)) {
-      acc = `${acc}  + ${key}: ${data2[key]}`;
-    } else if (!_.has(data2, key)) {
-      acc = `${acc}  - ${key}: ${data1[key]}`;
-    } else if (data1[key] !== data2[key]) {
-      acc = `${acc}  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
-    } else {
-      acc = `${acc}    ${key}: ${data1[key]}`;
-    }
-    return acc;
-  });
-  const outputData = compare.join('\n');
-  return `{\n${outputData}\n}`;
+  const result = makeStylish(diffTree);
+  return result;
 };
 export default genDiff;
