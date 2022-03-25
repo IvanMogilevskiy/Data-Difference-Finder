@@ -3,9 +3,9 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import buildInnerTree from './innerTree.js';
 import parseData from './parsers.js';
-import makeStylish from './formatters/stylish.js';
+import formatData from './formatters/index.js';
 
-const genDiff = (file1, file2) => {
+const genDiff = (file1, file2, formatName = 'stylish') => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
@@ -16,7 +16,7 @@ const genDiff = (file1, file2) => {
   const data2 = parseData(readFile(file2), format);
   const diffTree = buildInnerTree(data1, data2);
 
-  const result = makeStylish(diffTree);
+  const result = formatData(diffTree, formatName);
   return result;
 };
 export default genDiff;

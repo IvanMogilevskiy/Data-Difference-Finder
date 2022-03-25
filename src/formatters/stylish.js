@@ -46,5 +46,4 @@ const makeStylish = (data, depth = 1, basicIndent = ' ', spacesAmount = 4) => {
     `${bracketIndent}}`,
   ].join('\n');
 };
-
 export default makeStylish;
