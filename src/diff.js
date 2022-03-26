@@ -17,6 +17,7 @@ const genDiff = (file1, file2, formatName = 'stylish') => {
   const diffTree = buildInnerTree(data1, data2);
 
   const result = formatData(diffTree, formatName);
+  console.log(JSON.stringify(diffTree));
   return result;
 };
 export default genDiff;
