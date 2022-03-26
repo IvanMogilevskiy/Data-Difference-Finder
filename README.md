@@ -28,3 +28,6 @@ Comparison of two nested structures with 'stylish' formatter
 
 Comparison of two nested structures with 'plain' formatter
 [![asciicast](https://asciinema.org/a/1Wckh0TvprhhMdJL9JCYXDKF8.svg)](https://asciinema.org/a/1Wckh0TvprhhMdJL9JCYXDKF8)
+
+Comparison of two nested structures with 'json' formatter
+[![asciicast](https://asciinema.org/a/YyVYy7wdDrRnzTCeANOuiIORd.svg)](https://asciinema.org/a/YyVYy7wdDrRnzTCeANOuiIORd)
