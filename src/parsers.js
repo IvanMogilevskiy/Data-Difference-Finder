@@ -1,14 +1,20 @@
 import yaml from 'js-yaml';
+import path from 'path';
+import fs from 'fs';
 
-const parseData = (file, format) => {
-  let result;
-  if (format === '.json') {
-    result = JSON.parse(file);
-  }
-  if (format === '.yaml' || format === '.yml') {
-    result = yaml.load(file);
-  }
+const parseData = (file) => {
+  const format = path.extname(file);
+  const data = fs.readFileSync(file, 'utf-8');
 
-  return result;
+  switch (format) {
+    case '.json':
+      return JSON.parse(data);
+    case '.yaml':
+      return yaml.load(data);
+    case '.yml':
+      return yaml.load(data);
+    default:
+      return 'Format is not supported';
+  }
 };
 export default parseData;
