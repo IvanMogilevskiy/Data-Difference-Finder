@@ -1,23 +1,18 @@
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import path from 'path';
 import buildInnerTree from './innerTree.js';
 import parseData from './parsers.js';
 import formatData from './formatters/index.js';
 
 const genDiff = (file1, file2, formatName = 'stylish') => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-  const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
-  const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
-  const format = path.extname(getFixturePath(file1));
+  const getFixturePath = (filename) => path.resolve(process.cwd(), filename);
+  const path1 = getFixturePath(file1);
+  const path2 = getFixturePath(file2);
 
-  const data1 = parseData(readFile(file1), format);
-  const data2 = parseData(readFile(file2), format);
+  const data1 = parseData(path1);
+  const data2 = parseData(path2);
   const diffTree = buildInnerTree(data1, data2);
 
   const result = formatData(diffTree, formatName);
-  console.log(JSON.stringify(diffTree));
   return result;
 };
 export default genDiff;
