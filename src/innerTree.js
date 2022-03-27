@@ -3,7 +3,7 @@ import _ from 'lodash';
 const buildInnerTree = (data1, data2) => {
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
-  const unitedKeys = (_.union(keys1, keys2)).sort();
+  const unitedKeys = _.sortBy(_.union(keys1, keys2));
 
   const innerTree = unitedKeys.map((key) => {
     const currentValue1 = data1[key];
