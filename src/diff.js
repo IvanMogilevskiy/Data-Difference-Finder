@@ -3,10 +3,11 @@ import buildInnerTree from './innerTree.js';
 import parseData from './parsers.js';
 import formatData from './formatters/index.js';
 
+const getPath = (filename) => path.resolve(process.cwd(), filename);
+
 const genDiff = (file1, file2, formatName = 'stylish') => {
-  const getFixturePath = (filename) => path.resolve(process.cwd(), filename);
-  const path1 = getFixturePath(file1);
-  const path2 = getFixturePath(file2);
+  const path1 = getPath(file1);
+  const path2 = getPath(file2);
 
   const data1 = parseData(path1);
   const data2 = parseData(path2);
