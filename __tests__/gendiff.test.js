@@ -13,37 +13,55 @@ const expectedOutputPlain = readFile('expectedOutputPlain.txt');
 const expectedOutputJson = readFile('expectedOutputJson.txt');
 
 test('gendiff json nested', () => {
-  expect(gendiff('file1.json', 'file2.json')).toEqual(expectedOutputNested);
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.json');
+  expect(gendiff(file1, file2)).toEqual(expectedOutputNested);
 });
 
 test('gendiff yaml nested', () => {
-  expect(gendiff('file1.yml', 'file2.yml')).toEqual(expectedOutputNested);
+  const file1 = getFixturePath('file1.yml');
+  const file2 = getFixturePath('file2.yml');
+  expect(gendiff(file1, file2)).toEqual(expectedOutputNested);
 });
 
 test('gendiff json & yaml nested', () => {
-  expect(gendiff('file1.json', 'file2.yml')).toEqual(expectedOutputNested);
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.yml');
+  expect(gendiff(file1, file2)).toEqual(expectedOutputNested);
 });
 
 test('gendiff json plain', () => {
-  expect(gendiff('file1.json', 'file2.json', 'plain')).toEqual(expectedOutputPlain);
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.json');
+  expect(gendiff(file1, file2, 'plain')).toEqual(expectedOutputPlain);
 });
 
 test('gendiff yaml plain', () => {
-  expect(gendiff('file1.yml', 'file2.yml', 'plain')).toEqual(expectedOutputPlain);
+  const file1 = getFixturePath('file1.yml');
+  const file2 = getFixturePath('file2.yml');
+  expect(gendiff(file1, file2, 'plain')).toEqual(expectedOutputPlain);
 });
 
 test('gendiff json & yaml plain', () => {
-  expect(gendiff('file1.json', 'file2.yml', 'plain')).toEqual(expectedOutputPlain);
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.yml');
+  expect(gendiff(file1, file2, 'plain')).toEqual(expectedOutputPlain);
 });
 
 test('gendiff json with json method', () => {
-  expect(gendiff('file1.json', 'file2.json', 'json')).toEqual(expectedOutputJson);
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.json');
+  expect(gendiff(file1, file2, 'json')).toEqual(expectedOutputJson);
 });
 
 test('gendiff yaml with json method', () => {
-  expect(gendiff('file1.yml', 'file2.yml', 'json')).toEqual(expectedOutputJson);
+  const file1 = getFixturePath('file1.yml');
+  const file2 = getFixturePath('file2.yml');
+  expect(gendiff(file1, file2, 'json')).toEqual(expectedOutputJson);
 });
 
 test('gendiff json & yaml with json method', () => {
-  expect(gendiff('file1.json', 'file2.yml', 'json')).toEqual(expectedOutputJson);
+  const file1 = getFixturePath('file1.json');
+  const file2 = getFixturePath('file2.yml');
+  expect(gendiff(file1, file2, 'json')).toEqual(expectedOutputJson);
 });
