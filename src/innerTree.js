@@ -6,42 +6,40 @@ const buildInnerTree = (data1, data2) => {
   const unitedKeys = _.sortBy(_.union(keys1, keys2));
 
   const innerTree = unitedKeys.map((key) => {
-    const currentValue1 = data1[key];
-    const currentValue2 = data2[key];
-
-    if (_.isObject(currentValue1) && _.isObject(currentValue2)) {
-      return {
-        key,
-        status: 'nested',
-        children: buildInnerTree(currentValue1, currentValue2),
-      };
-    }
     if (!_.has(data1, key)) {
       return {
         key,
         status: 'added',
-        value: currentValue2,
+        value: data2[key],
       };
     }
     if (!_.has(data2, key)) {
       return {
         key,
         status: 'removed',
-        value: currentValue1,
+        value: data1[key],
       };
     }
-    if (!_.isEqual(currentValue1, currentValue2)) {
+    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+      return {
+        key,
+        status: 'nested',
+        children: buildInnerTree(data1[key], data2[key]),
+      };
+    }
+    if (!_.isEqual(data1[key], data2[key])) {
       return {
         key,
         status: 'changed',
-        valueBefore: currentValue1,
-        valueAfter: currentValue2,
+        // valueBefore: data1[key],
+        // valueAfter: data2[key],
+        value: [data1[key], data2[key]],
       };
     }
     return {
       key,
       status: 'unchanged',
-      value: currentValue1,
+      value: data1[key],
     };
   });
   return innerTree;

@@ -9,18 +9,16 @@ const returnValue = (item) => {
 
 const makePlain = (data) => {
   const iter = (currentValue, acc = '') => currentValue
-    .flatMap(({
-      key, status, value, valueBefore, valueAfter, children,
-    }) => {
-      const currentPath = ([...acc, key]);
+    .flatMap((node) => {
+      const currentPath = ([...acc, node.key]);
       const path = currentPath.join('.');
-      switch (status) {
+      switch (node.status) {
         case 'nested':
-          return iter(children, currentPath);
+          return iter(node.children, currentPath);
         case 'changed':
-          return `Property '${path}' was updated. From ${returnValue(valueBefore)} to ${returnValue(valueAfter)}`;
+          return `Property '${path}' was updated. From ${returnValue(node.value[0])} to ${returnValue(node.value[1])}`;
         case 'added':
-          return `Property '${path}' was added with value: ${returnValue(value)}`;
+          return `Property '${path}' was added with value: ${returnValue(node.value)}`;
         case 'removed':
           return `Property '${path}' was removed`;
         default:

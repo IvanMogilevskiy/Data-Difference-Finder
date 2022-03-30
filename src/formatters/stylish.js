@@ -24,20 +24,18 @@ const makeStylish = (data, depth = 1, basicIndent = ' ', spacesAmount = 4) => {
   const currentIndent = basicIndent.repeat(indentSize);
   const bracketIndent = basicIndent.repeat(indentSize - 2);
 
-  const output = data.flatMap(({
-    key, status, value, valueBefore, valueAfter, children,
-  }) => {
-    switch (status) {
+  const output = data.flatMap((node) => {
+    switch (node.status) {
       case 'nested':
-        return `${currentIndent}  ${key}: ${makeStylish(children, depth + 1)}`;
+        return `${currentIndent}  ${node.key}: ${makeStylish(node.children, depth + 1)}`;
       case 'changed':
-        return `${currentIndent}- ${key}: ${iter(valueBefore, depth + 1)}\n${currentIndent}+ ${key}: ${iter(valueAfter, depth + 1)}`;
+        return `${currentIndent}- ${node.key}: ${iter(node.value[0], depth + 1)}\n${currentIndent}+ ${node.key}: ${iter(node.value[1], depth + 1)}`;
       case 'added':
-        return `${currentIndent}+ ${key}: ${iter(value, depth + 1)}`;
+        return `${currentIndent}+ ${node.key}: ${iter(node.value, depth + 1)}`;
       case 'removed':
-        return `${currentIndent}- ${key}: ${iter(value, depth + 1)}`;
+        return `${currentIndent}- ${node.key}: ${iter(node.value, depth + 1)}`;
       default:
-        return `${currentIndent}  ${key}: ${iter(value, depth + 1)}`;
+        return `${currentIndent}  ${node.key}: ${iter(node.value, depth + 1)}`;
     }
   });
   return [
