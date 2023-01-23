@@ -9,14 +9,15 @@ env:
   browser: true
 
 extends:
-  - "airbnb-base"
-  - "plugin:jest/recommended"
+  - 'airbnb-base'
+  - 'plugin:jest/recommended'
+  - 'prettier'
 
 parserOptions:
   ecmaVersion: latest
   sourceType: module
 
 rules:
-  no-underscore-dangle: [2, { "allow": ["__filename", "__dirname"] }]
+  no-underscore-dangle: [2, { 'allow': ['__filename', '__dirname'] }]
   no-console: 0
   import/extensions: 0
