@@ -3,7 +3,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/cf63e7ade464522d83cf/maintainability)](https://codeclimate.com/github/IvanMogilevskiy/frontend-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/cf63e7ade464522d83cf/test_coverage)](https://codeclimate.com/github/IvanMogilevskiy/frontend-project-lvl2/test_coverage)
 
-This repository was created by Ivan Mogilevskiy as the second educational project on [Hexlet courses](https://ru.hexlet.io/pages/about?utm_source=github&utm_medium=link&utm_campaign=nodejs-package). This is a program that finds differences between two json or yaml files.
+This is a program that finds differences between two json or yaml files.
 
 
 ## Setup
